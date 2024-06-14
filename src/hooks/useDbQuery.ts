@@ -16,7 +16,6 @@ const fetchDashboards = async (dbQuery: string): Promise<QueriedData> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       // This is a mock implementation of a database query
-      console.log("Fetching data from database with query:", dbQuery);
       switch (dbQuery) {
         case "SELECT * FROM table1":
           resolve(mockData1);

@@ -8,7 +8,6 @@ function App() {
   // TODO Use a route like /dashboard/:id to keep track of the selected dashboard
   const [state, setState] = useState<{
     selectedDashboard: null | number
-
   }>({
     selectedDashboard: null,
   })
@@ -36,7 +35,7 @@ function App() {
 
   return (
     <main className="h-screen">
-      <header className="p-2">
+      <header className="p-4">
         <select
           className="select w-full max-w-xs border-primary"
           onChange={(e) => setState(prev => ({
@@ -52,18 +51,18 @@ function App() {
           }
         </select>
       </header>
-      <div className="flex flex-col gap-4 ">
+      <div className="flex flex-col gap-4 p-4">
         {
           chartsByROwAndColumn?.map((charts: Chart[], i) => {
             console.log("charts", charts)
             if (!charts.length) {
               return null
             }
-            return <ul className="flex w-full  gap-4" key={i}>
+            return <ul className="flex w-full  gap-4 " key={i}>
               {
 
                 charts.map((chart, j) => {
-                  return <li className="flex-1 h-48" key={j}>
+                  return <li className="flex-1 h-48 shadow-md border border-primary rounded-md" key={j}>
                     <LineChartWithData {...chart} />
                   </li>
                 })

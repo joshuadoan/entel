@@ -1,30 +1,39 @@
-# React + TypeScript + Vite
+# Dashboard with charts
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```
+npm install
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## How it works
+
+- The page loads while we fetch the user's dashboards
+- The first dashboard in the list is selected by default
+- Each dashboard contains a list of charts to render
+
+```ts
+export type Chart = {
+  query: string;
+  name: string;
+  position: {
+    row: number;
+    column: number;
+  };
+};
+
+export type Dashboard = {
+  name: string;
+  id: number;
+  charts: Chart[];
+};
+```
+
+- Each chart has a query for the database, a name, and some layout information.
+- We use the layout information to scaffold the charts on the page while the data for each chart fetches independently.
+- Each chart has its own layout information. Right now it is just row and column, but this could be expanded to size, chart type etc.
+
+
+## Things to note
+- You can switch between dashboards with the dropdown. In this example data we have two.
+- We only sees spinners once on the initial load, then `react-query` will refetch in the background as needed
+- Typescript will need some work. Maybe we can use generics somehow (maybe infer the types from the chart data we get back?).
