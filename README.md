@@ -40,5 +40,5 @@ export type Dashboard = {
 ## Things to note
 - You can switch between dashboards with the dropdown. In this example data we have two.
 - Because we have the layout info from the initial load we can render the charts BEFORE they fetch their data - which I think might be a good user experience 
-- We only sees spinners once on the initial load, then `react-query` will refetch in the background as needed
+- We only see spinners once on the initial load, then `react-query` will refetch in the background as needed
 - Typescript will need some work. Maybe we can use generics somehow (maybe infer the types from the chart data we get back?).
